@@ -38,53 +38,17 @@ TriviaQuestions = [
 ];
 
 function createEndGameElements() {
-	// $(".questionAnsResDiv").remove();	
-	//create result
-	var createDiv = $(".questionAnsResDiv");
-	var resultElement = $("<h2>");	
-	resultElement.html("Game over! Here is your score: ");
-	resultElement.addClass("result");
-	resultElement.appendTo(createDiv);
-	//correct count
-	var correctCntElement = $("<p>");
-	correctCntElement.html("Correct answers: " + crtAnsCount);
-	correctCntElement.addClass("ans");
-	correctCntElement.appendTo(createDiv);
-	//wrong count
-	var wrongCntElement = $("<p>");
-	wrongCntElement.html("Wrong answers: " + wrngAnsCount);
-	wrongCntElement.addClass("ans");
-	wrongCntElement.appendTo(createDiv);
-	//unanswered count
-	var unansweredCntElement = $("<p>");
-	unansweredCntElement.html("Unanswered: " + unanswered);
-	unansweredCntElement.addClass("ans");
-	unansweredCntElement.appendTo(createDiv);
-	//start over?
-	var startOverElement = $("<p>");
-	startOverElement.html("Start over?");
-	startOverElement.addClass("startOver");
-	startOverElement.appendTo(createDiv);	
+	htmlTags = "<p class='result'>Game over! Here is your score:</p><br><p class='result'>Correct answers: " + 
+	crtAnsCount + "</p><p class='result'>Wrong answers: " + wrngAnsCount +
+	"</p><p class='result'>Unanswered: " + unanswered +
+	"</p><p class='startOver ans'>Start over?</p>";
+	$(".questionAnsResDiv").html(htmlTags);		
 }
 
-function createResultElements(playerResult, resImgSrcName) {	
-	// $(".questionAnsResDiv").remove();	
-	//create results
-	var createDiv = $(".questionAnsResDiv");
-	createDiv.empty();
-	var resultElement = $("<h2>");
-	resultElement.html(playerResult);
-	resultElement.addClass("result");
-	resultElement.appendTo(createDiv);
-	//correct answer
-	var correctAnsElement = $("<p>");
-	correctAnsElement.html("The correct answer was: " + TriviaQuestions[questionCntr].correctAnswer);
-	correctAnsElement.addClass("question");
-	correctAnsElement.appendTo(createDiv);
-	//image
-	var resImgElement = $("<img>");
-	resImgElement.attr('src',"assets/images/"+resImgSrcName);
-	resImgElement.appendTo(createDiv);	
+function createResultElements(playerResult, resImgSrcName) {
+	htmlTags = 	"<h2 class='result'>" + playerResult + "</h2><p class='question'>The correct answer was: " + 
+	TriviaQuestions[questionCntr].correctAnswer + "</p><img src='assets/images/" + resImgSrcName + "'>"
+	$(".questionAnsResDiv").html(htmlTags);			
 	setTimeout(nextQuestion, 3000);
 }
 
@@ -104,7 +68,7 @@ function nextQuestion() {
 
 function createQuestAnsElements() {
 	htmlTags = "<p class='questionCls'>" + TriviaQuestions[questionCntr].question + 
-	"</p><p class='ans'>" + TriviaQuestions[questionCntr].answerChoices[0] +
+	"</p><br><p class='ans'>" + TriviaQuestions[questionCntr].answerChoices[0] +
 	"</p><p class='ans'>" + TriviaQuestions[questionCntr].answerChoices[1] +
 	"</p><p class='ans'>" + TriviaQuestions[questionCntr].answerChoices[2] +
 	"</p><p class='ans'>" + TriviaQuestions[questionCntr].answerChoices[3] + "</p>"
@@ -155,7 +119,8 @@ $(document).ready(function() {
 
 	//on click start button
 	$(".gameStart, .startOver").on("click", function() {
-		$(".gameStart").hide();			
+		$(".gameStart").hide();	
+		//call to create html		
 		createQuestAnsElements();
 		//start timer
 		startTimer();
@@ -163,7 +128,6 @@ $(document).ready(function() {
 	});
 
 	// display question and answers				
-	// $(".ans").on("click", function() {
 	$("body").on('click','.ans',function(){
 		console.log($(this).text());
 		chosenAnswer = $(this).text();
@@ -183,6 +147,8 @@ $(document).ready(function() {
 		timedout = false;		
 		return false;
 	});	
+
+	//reset game
 	$("body").on('click','.startOver',function() {	
 		//initialize all
 		questionCntr=0;
