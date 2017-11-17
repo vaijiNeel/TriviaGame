@@ -41,7 +41,7 @@ function createEndGameElements() {
 	htmlTags = "<p class='result'>Game over! Here is your score:</p><br><p class='result'>Correct answers: " + 
 	crtAnsCount + "</p><p class='result'>Wrong answers: " + wrngAnsCount +
 	"</p><p class='result'>Unanswered: " + unanswered +
-	"</p><p class='startOver ans'>Start over?</p>";
+	"</p><p class='startOver'><strong>Start over?</strong></p>";
 	$(".questionAnsResDiv").html(htmlTags);		
 }
 
@@ -118,7 +118,7 @@ $(document).ready(function() {
 	console.log("questionCntr = " + questionCntr);
 
 	//on click start button
-	$(".gameStart, .startOver").on("click", function() {
+	$(".gameStart").on("click", function() {
 		$(".gameStart").hide();	
 		//call to create html		
 		createQuestAnsElements();
@@ -151,6 +151,7 @@ $(document).ready(function() {
 	//reset game
 	$("body").on('click','.startOver',function() {	
 		//initialize all
+		$(".questionAnsResDiv").empty();
 		questionCntr=0;
 		crtAnsCount=0;
 		wrngAnsCount=0;

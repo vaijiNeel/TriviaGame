@@ -68,3 +68,10 @@ img {
 	font-size: 30px;
 	font-weight: bold;	
 }
+
+.startOver:hover {
+	text-align: center;
+	background-color: yellow;
+	font-weight: bold;	
+	border: 1px solid green;	
+}
